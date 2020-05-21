@@ -1178,8 +1178,9 @@ define-command -hidden lsp-enable -docstring "Default integration with kak-lsp" 
     lsp-inline-diagnostics-enable global
     lsp-diagnostic-lines-enable global
 
-    map global goto d '<esc>: lsp-definition<ret>' -docstring 'definition'
-    map global goto r '<esc>: lsp-references<ret>' -docstring 'references'
+    map global goto d '<esc>: lsp-definition<ret>'     -docstring 'definition'
+    map global goto r '<esc>: lsp-references<ret>'     -docstring 'references'
+    map global goto m '<esc>: lsp-implementation<ret>' -docstring 'implementation'
 
     hook -group lsp global BufCreate .* %{
         lsp-did-open
@@ -1203,8 +1204,9 @@ define-command -hidden lsp-disable -docstring "Disable kak-lsp" %{
     remove-highlighter global/rust_analyzer_inlay_hints
     lsp-inline-diagnostics-disable global
     lsp-diagnostic-lines-disable global
-    unmap global goto d '<esc>: lsp-definition<ret>' -docstring 'definition'
-    unmap global goto r '<esc>: lsp-references<ret>' -docstring 'references'
+    unmap global goto d '<esc>: lsp-definition<ret>'
+    unmap global goto r '<esc>: lsp-references<ret>'
+    unmap global goto m '<esc>: lsp-implementation<ret>'
     remove-hooks global lsp
     remove-hooks global lsp-auto-hover
     remove-hooks global lsp-auto-hover-insert-mode
@@ -1224,8 +1226,9 @@ define-command lsp-enable-window -docstring "Default integration with kak-lsp in
     lsp-inline-diagnostics-enable window
     lsp-diagnostic-lines-enable window
 
-    map window goto d '<esc>: lsp-definition<ret>' -docstring 'definition'
-    map window goto r '<esc>: lsp-references<ret>' -docstring 'references'
+    map window goto d '<esc>: lsp-definition<ret>'     -docstring 'definition'
+    map window goto r '<esc>: lsp-references<ret>'     -docstring 'references'
+    map window goto m '<esc>: lsp-implementation<ret>' -docstring 'implementation'
 
     hook -group lsp window WinClose .* lsp-did-close
     hook -group lsp window BufWritePost .* lsp-did-save
@@ -1250,6 +1253,7 @@ define-command lsp-disable-window -docstring "Disable kak-lsp in the window scop
     lsp-diagnostic-lines-disable window
     unmap window goto d '<esc>: lsp-definition<ret>'
     unmap window goto r '<esc>: lsp-references<ret>'
+    unmap window goto m '<esc>: lsp-implementation<ret>'
     remove-hooks window lsp
     remove-hooks global lsp-auto-hover
     remove-hooks global lsp-auto-hover-insert-mode
